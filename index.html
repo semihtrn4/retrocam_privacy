@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RetroCam – Privacy Policy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=DM+Mono:wght@300;400;500&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #F2ECD8;
+      --cream2: #E8DFC8;
+      --amber: #C85A1A;
+      --gold: #D4A853;
+      --dark: #1A1510;
+      --darker: #120F0A;
+      --card: #1F1A13;
+      --card2: #251F16;
+      --border: rgba(212,168,83,0.2);
+      --border2: rgba(212,168,83,0.1);
+      --text: #C8B89A;
+      --muted: #6B5A42;
+      --grain-opacity: 0.04;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--darker);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      line-height: 1.9;
+      overflow-x: hidden;
+    }
+
+    /* Film grain texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: var(--grain-opacity);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Vignette */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* HEADER */
+    header {
+      position: relative;
+      background: linear-gradient(180deg, #0D0B07 0%, var(--darker) 100%);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Film strip top bar */
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 18px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--darker) 0px,
+        var(--darker) 10px,
+        var(--amber) 10px,
+        var(--amber) 14px,
+        var(--darker) 14px,
+        var(--darker) 24px
+      );
+      opacity: 0.6;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 18px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--darker) 0px,
+        var(--darker) 10px,
+        var(--gold) 10px,
+        var(--gold) 14px,
+        var(--darker) 14px,
+        var(--darker) 24px
+      );
+      opacity: 0.4;
+    }
+
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 44px 24px 36px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .camera-icon {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      animation: flicker 4s ease-in-out infinite;
+    }
+
+    @keyframes flicker {
+      0%, 90%, 100% { opacity: 1; filter: drop-shadow(0 0 10px rgba(212,168,83,0.5)); }
+      92% { opacity: 0.7; filter: drop-shadow(0 0 4px rgba(212,168,83,0.2)); }
+      94% { opacity: 1; filter: drop-shadow(0 0 14px rgba(212,168,83,0.8)); }
+      96% { opacity: 0.8; filter: drop-shadow(0 0 6px rgba(212,168,83,0.3)); }
+    }
+
+    .header-text h1 {
+      font-family: 'Special Elite', cursive;
+      font-size: clamp(22px, 5vw, 40px);
+      color: var(--cream);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .header-text h1 span {
+      color: var(--gold);
+    }
+
+    .header-text .sub {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 8px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    /* Light leak effect */
+    .light-leak {
+      position: absolute;
+      top: 0; right: 0;
+      width: 200px;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 40%, rgba(200,90,26,0.08) 70%, rgba(212,168,83,0.12) 100%);
+      pointer-events: none;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 52px 24px 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .updated {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 7px 16px;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .updated::before {
+      content: '●';
+      color: var(--amber);
+      font-size: 8px;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .intro-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 2px;
+      padding: 28px 32px;
+      margin-bottom: 52px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-card::before {
+      content: '35mm';
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-family: 'Special Elite', cursive;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      opacity: 0.5;
+    }
+
+    h2 {
+      font-family: 'Special Elite', cursive;
+      font-size: clamp(10px, 1.5vw, 12px);
+      color: var(--gold);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--amber);
+      padding: 14px 20px;
+      margin: 52px 0 22px;
+      border-radius: 0 2px 2px 0;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--gold);
+      margin: 28px 0 14px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      opacity: 0.8;
+    }
+
+    p {
+      color: var(--text);
+      margin-bottom: 16px;
+      font-size: 13.5px;
+    }
+
+    strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,168,83,0.3);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    a:hover {
+      color: var(--cream);
+      border-color: var(--gold);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+
+    ul li {
+      padding: 10px 12px 10px 36px;
+      position: relative;
+      color: var(--text);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 13.5px;
+    }
+
+    ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 12px;
+      color: var(--amber);
+      font-size: 12px;
+    }
+
+    .summary-block {
+      background: linear-gradient(135deg, var(--card) 0%, var(--card2) 100%);
+      border: 1px solid rgba(212,168,83,0.2);
+      border-radius: 2px;
+      padding: 22px 26px;
+      margin-bottom: 10px;
+    }
+
+    .summary-block ul li::before {
+      content: '◆';
+      color: var(--gold);
+      font-size: 7px;
+      top: 15px;
+    }
+
+    .alert-box {
+      background: rgba(200,90,26,0.06);
+      border: 1px solid rgba(200,90,26,0.25);
+      border-radius: 2px;
+      padding: 16px 22px;
+      margin: 16px 0;
+    }
+
+    .alert-box p {
+      color: #D4A87A;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .contact-box {
+      background: var(--card2);
+      border: 1px solid rgba(212,168,83,0.25);
+      border-radius: 2px;
+      padding: 28px 32px;
+      margin-top: 10px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .feat-item {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 2px;
+      padding: 12px 16px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .feat-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Film strip divider */
+    .film-divider {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 40px 0;
+      opacity: 0.3;
+    }
+
+    .film-divider span {
+      display: inline-block;
+      width: 14px;
+      height: 10px;
+      border: 1px solid var(--gold);
+      border-radius: 1px;
+      margin: 0 2px;
+    }
+
+    footer {
+      margin-top: 80px;
+      border-top: 1px solid var(--border);
+      padding: 28px 0 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p {
+      font-family: 'Special Elite', cursive;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .footer-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,168,83,0.3), transparent);
+      margin: 16px auto;
+      max-width: 300px;
+    }
+
+    /* Film frame numbers on side */
+    .frame-number {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 4px;
+      opacity: 0.3;
+    }
+
+    @media (max-width: 500px) {
+      .header-inner { padding: 32px 16px 28px; gap: 16px; }
+      .container { padding: 36px 16px 60px; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .frame-number { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="frame-number">RETROCAM · STYLE RETRO CAM · 35MM ·</div>
+
+<header>
+  <div class="light-leak"></div>
+  <div class="header-inner">
+    <svg class="camera-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Camera body -->
+      <rect x="10" y="32" width="80" height="52" rx="6" fill="none" stroke="#D4A853" stroke-width="1.5" opacity="0.5"/>
+      <rect x="10" y="32" width="80" height="52" rx="6" fill="rgba(212,168,83,0.04)"/>
+      <!-- Viewfinder bump -->
+      <rect x="34" y="22" width="22" height="12" rx="4" fill="none" stroke="#D4A853" stroke-width="1.5" opacity="0.5"/>
+      <!-- Lens outer ring -->
+      <circle cx="50" cy="58" r="18" fill="none" stroke="#D4A853" stroke-width="1.5" opacity="0.6"/>
+      <!-- Lens mid ring -->
+      <circle cx="50" cy="58" r="12" fill="none" stroke="#C85A1A" stroke-width="1.5" opacity="0.8"/>
+      <!-- Lens inner -->
+      <circle cx="50" cy="58" r="7" fill="none" stroke="#D4A853" stroke-width="1" opacity="0.9"/>
+      <!-- Lens center -->
+      <circle cx="50" cy="58" r="3" fill="#D4A853" opacity="1"/>
+      <!-- Light leak glow -->
+      <circle cx="50" cy="58" r="20" fill="none" stroke="#C85A1A" stroke-width="0.5" stroke-dasharray="3 6" opacity="0.4"/>
+      <!-- Shutter button -->
+      <circle cx="75" cy="38" r="4" fill="none" stroke="#D4A853" stroke-width="1.5" opacity="0.6"/>
+      <!-- Film advance knob -->
+      <rect x="14" y="36" width="10" height="6" rx="2" fill="none" stroke="#C85A1A" stroke-width="1.2" opacity="0.7"/>
+      <!-- Film sprocket holes -->
+      <rect x="14" y="73" width="5" height="4" rx="1" fill="none" stroke="#D4A853" stroke-width="1" opacity="0.4"/>
+      <rect x="23" y="73" width="5" height="4" rx="1" fill="none" stroke="#D4A853" stroke-width="1" opacity="0.4"/>
+      <rect x="72" y="73" width="5" height="4" rx="1" fill="none" stroke="#D4A853" stroke-width="1" opacity="0.4"/>
+      <rect x="81" y="73" width="5" height="4" rx="1" fill="none" stroke="#D4A853" stroke-width="1" opacity="0.4"/>
+    </svg>
+    <div class="header-text">
+      <h1>Retro<span>cam</span></h1>
+      <div class="sub">Privacy Policy — Style Retro Cam</div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <p class="updated">Last updated: April 1, 2026</p>
+
+  <div class="intro-card">
+    <p>
+      This privacy notice for <strong>Retrocam: Style Retro Cam</strong> ("we," "us," or "our") explains how we collect, use, disclose, and safeguard your information when you use our mobile application. Retrocam is a vintage film camera app designed to capture stunning photos and videos with authentic retro tones, analog film grain, light leaks, and vintage filters — including 8mm video mode, dazz cam style effects, and iconic film models like Classic M, D Classic, CCD R, and D Exp.
+    </p>
+    <p style="margin-bottom:0;">
+      Please read this policy carefully. If you disagree with its terms, please discontinue use of the app.
+    </p>
+  </div>
+
+  <h2>Summary of Key Points</h2>
+  <div class="summary-block">
+    <ul>
+      <li>We collect device identifiers and purchase data primarily through RevenueCat to manage your subscription.</li>
+      <li>We do <strong>not</strong> sell your personal data to third parties or use it for advertising.</li>
+      <li>Photos and videos you capture are saved <strong>locally on your device</strong> and are not uploaded to our servers.</li>
+      <li>All filter presets, film models, and edits you apply are processed entirely on-device.</li>
+      <li>You may request deletion of your data at any time by contacting us.</li>
+      <li>We do not knowingly collect data from users under 18 years of age.</li>
+    </ul>
+  </div>
+
+  <h2>1. What Information Do We Collect?</h2>
+
+  <h3>Data Collected Automatically</h3>
+  <ul>
+    <li><strong>Device ID</strong> — Used by RevenueCat to identify your device for subscription management.</li>
+    <li><strong>User ID</strong> — A RevenueCat-assigned identifier to link your account with your subscription status.</li>
+    <li><strong>Purchase &amp; Subscription History</strong> — Records of your Retrocam Pro subscription processed via Apple App Store and RevenueCat.</li>
+    <li><strong>Product Interaction Data</strong> — Anonymized data about how you use the app (e.g., filters used, camera modes activated) to improve the platform.</li>
+    <li><strong>Crash &amp; Performance Data</strong> — Technical diagnostics including crash logs, launch times, and performance metrics to ensure app stability.</li>
+  </ul>
+
+  <h3>Data You Provide</h3>
+  <ul>
+    <li>Retrocam does <strong>not</strong> require account registration or login.</li>
+    <li>If you contact our support team, we may collect your email address and the content of your message solely to respond to your inquiry.</li>
+  </ul>
+
+  <h3>Photos &amp; Videos</h3>
+  <div class="alert-box">
+    <p>📸 All photos and videos captured with Retrocam — including those with vintage filters, film grain, light leaks, and retro effects applied — are saved <strong>directly to your device</strong> (Camera Roll / Photos library). We do <strong>not</strong> upload, access, or store your photos or videos on our servers.</p>
+  </div>
+  <div class="alert-box">
+    <p>🎞 All film filters, color tone edits, vignette, and frame processing are performed <strong>entirely on your device</strong>. No image data is transmitted to external servers during editing or capture.</p>
+  </div>
+
+  <h3>Camera Access</h3>
+  <p>Retrocam requests access to your device's <strong>camera</strong> to capture photos and videos with vintage film effects. This permission is used exclusively for the core functionality of the app. You may revoke this permission at any time in your device Settings.</p>
+
+  <h3>Payment Information</h3>
+  <p>All payments are processed directly through the Apple App Store. We do <strong>not</strong> have access to your payment card details, bank information, or billing address. RevenueCat receives only confirmation of your subscription status.</p>
+
+  <h2>2. App Features Overview</h2>
+  <p>Retrocam provides the following core features to bring authentic analog film aesthetics to your everyday photography:</p>
+  <div class="features-grid">
+    <div class="feat-item"><div class="feat-dot" style="background:#C85A1A;"></div>Vintage Film Filters</div>
+    <div class="feat-item"><div class="feat-dot" style="background:#D4A853;"></div>Film Grain &amp; Light Leaks</div>
+    <div class="feat-item"><div class="feat-dot" style="background:#D4A853;"></div>8mm Video Mode</div>
+    <div class="feat-item"><div class="feat-dot" style="background:#C85A1A;"></div>Snap Camera Mode</div>
+    <div class="feat-item"><div class="feat-dot" style="background:#D4A853;"></div>Film Models (Classic M, D Classic, CCD R, D Exp)</div>
+    <div class="feat-item"><div class="feat-dot" style="background:#C85A1A;"></div>Dazz Cam Style Effects</div>
+    <div class="feat-item"><div class="feat-dot" style="background:#D4A853;"></div>Y2K &amp; 90s Tone Filters</div>
+    <div class="feat-item"><div class="feat-dot" style="background:#C85A1A;"></div>Frame Ratio &amp; Vignette</div>
+  </div>
+
+  <h2>3. How Do We Use Your Information?</h2>
+  <ul>
+    <li>To verify and manage your Retrocam Pro subscription status</li>
+    <li>To unlock premium film models, filters, and features for Pro subscribers</li>
+    <li>To improve app performance and fix technical issues</li>
+    <li>To analyze aggregate usage patterns and plan new vintage filter packs</li>
+    <li>To respond to customer support inquiries</li>
+    <li>To comply with legal obligations</li>
+  </ul>
+
+  <h2>4. Third-Party Services</h2>
+  <p>We use the following trusted third-party services that may process data on our behalf:</p>
+  <ul>
+    <li><strong>RevenueCat</strong> — Subscription and in-app purchase management. Collects Device ID, User ID, and purchase history. <a href="https://www.revenuecat.com/privacy" target="_blank">RevenueCat Privacy Policy →</a></li>
+    <li><strong>Apple App Store</strong> — Payment processing and subscription verification.</li>
+  </ul>
+  <p>We do <strong>not</strong> integrate advertising networks, analytics SDKs that track users across apps, or data brokers.</p>
+
+  <h2>5. Legal Bases for Processing (GDPR)</h2>
+  <p>If you are located in the European Economic Area (EEA), United Kingdom, or Turkey, we process your data based on:</p>
+  <ul>
+    <li><strong>Performance of a contract</strong> — To deliver your Retrocam Pro subscription</li>
+    <li><strong>Legitimate interests</strong> — To improve app stability and performance</li>
+    <li><strong>Legal obligations</strong> — To comply with applicable laws</li>
+    <li><strong>Your consent</strong> — Where explicitly required (e.g., camera access)</li>
+  </ul>
+
+  <h2>6. When Do We Share Your Information?</h2>
+  <p>We do <strong>not</strong> sell your personal data. We may share data only in these limited circumstances:</p>
+  <ul>
+    <li><strong>Service providers</strong> — RevenueCat, as described above, to manage subscriptions</li>
+    <li><strong>Legal requirements</strong> — When required by law, court order, or governmental authority</li>
+    <li><strong>Business transfers</strong> — In the event of a merger, acquisition, or sale of assets</li>
+    <li><strong>Fraud prevention</strong> — To detect and prevent fraudulent transactions</li>
+  </ul>
+
+  <h2>7. Data Retention</h2>
+  <p>We retain your data only as long as necessary to provide our services or as required by law. Subscription records managed by RevenueCat are retained in accordance with their data retention policy. Anonymized usage and diagnostic data may be retained for up to 12 months.</p>
+
+  <h2>8. How Do We Keep Your Information Safe?</h2>
+  <p>We implement industry-standard security measures including encrypted data transmission (HTTPS/TLS), access controls, and regular security reviews. However, no system is completely secure and we cannot guarantee absolute security of your information.</p>
+
+  <h2>9. Do We Collect Data from Minors?</h2>
+  <p>Retrocam is not directed at children under the age of 18. We do not knowingly collect personal information from minors. If you believe a minor has provided us with personal data, please contact us and we will take steps to delete such information.</p>
+
+  <h2>10. Your Privacy Rights</h2>
+  <p>Depending on your location, you may have the right to:</p>
+  <ul>
+    <li>Access the personal data we hold about you</li>
+    <li>Request correction of inaccurate data</li>
+    <li>Request deletion of your data</li>
+    <li>Withdraw consent at any time (including revoking camera permissions via device Settings)</li>
+    <li>Data portability (receive your data in a structured format)</li>
+    <li>Lodge a complaint with your local data protection authority</li>
+  </ul>
+
+  <h2>11. Data Deletion</h2>
+  <p>To request deletion of your data, please contact us at the email address below. We will process your request within 30 days. Note that some data may need to be retained for legal compliance purposes.</p>
+
+  <h2>12. Cookies and Tracking Technologies</h2>
+  <p>The Retrocam mobile app does not use browser cookies. Standard mobile identifiers (Device ID) are used solely for subscription management as described above. We do not use cross-app tracking technologies or advertising identifiers (IDFA) for ad targeting.</p>
+
+  <h2>13. Do-Not-Track</h2>
+  <p>As Retrocam does not engage in cross-site tracking, Do-Not-Track signals are not applicable to our services.</p>
+
+  <h2>14. US Privacy Rights</h2>
+  <p>If you are a US resident, you may request access, correction, or deletion of your personal data by contacting us. We do not sell personal information as defined under the California Consumer Privacy Act (CCPA) or similar state laws.</p>
+
+  <h2>15. Updates to This Policy</h2>
+  <p>We may update this privacy policy from time to time. We will notify you of material changes by updating the "Last updated" date at the top of this document. We encourage you to review this policy periodically.</p>
+
+  <h2>16. Contact Us</h2>
+  <div class="contact-box">
+    <p>Have questions, concerns, or requests regarding your privacy?</p>
+    <br/>
+    <p>📧 Email: <a href="mailto:support@vaykr.qzz.io">support@vaykr.qzz.io</a></p>
+    <br/>
+    <p style="color: var(--muted); font-size: 12px;">We aim to respond to all privacy inquiries within 5 business days.</p>
+  </div>
+
+  <footer>
+    <div class="footer-line"></div>
+    <p>© 2026 Retrocam &nbsp;·&nbsp; Style Retro Cam &nbsp;·&nbsp; All Rights Reserved</p>
+    <div class="footer-line"></div>
+  </footer>
+
+</div>
+
+</body>
+</html>
